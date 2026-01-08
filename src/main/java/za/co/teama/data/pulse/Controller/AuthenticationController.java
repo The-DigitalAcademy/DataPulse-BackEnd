@@ -1,5 +1,6 @@
 package za.co.teama.data.pulse.Controller;
 
+import Dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class AuthenticationController {
 
     // auth controller incomplete - register respondent user
     @PostMapping("/respondent")
-    public ResponseEntity<Object> registerUser(@RequestBody Object userDto) {
+    public ResponseEntity<UserDto> registerUser(@RequestBody Object userDto) {
 
         // Must return userDto
         return null;
