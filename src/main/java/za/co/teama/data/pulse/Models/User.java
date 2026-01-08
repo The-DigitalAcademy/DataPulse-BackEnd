@@ -12,6 +12,7 @@ public class User {
     private UUID id;
     private String  Name;
     private String surname;
+
     private String email;
     private String password;
     private String role;

@@ -9,7 +9,7 @@ import za.co.teama.data.pulse.Service.SurveyService;
 @RestController
 @RequestMapping("/api/survey")
 public class SurveyController {
-    private final SurveyService surveyService = null;
+    private final SurveyService surveyService;
 
     public SurveyController(SurveyService surveyService) {
         this.surveyService = surveyService;
