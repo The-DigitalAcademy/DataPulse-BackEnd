@@ -1,5 +1,7 @@
 package za.co.teama.data.pulse.Controller;
 
+import Dto.UserDto;
+import org.aspectj.apache.bcel.Repository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +16,24 @@ import za.co.teama.data.pulse.Service.AuthenticationService;
 public class AuthenticationController {
 
     // Inject authService
-  private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
-  public AuthenticationController(AuthenticationService authenticationService) {
-    this.authenticationService = authenticationService;
-  }
-  // use authService, pass incoming data from request to appropriate service methods
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
+    // use authService, pass incoming data from request to appropriate service methods
+    @PostMapping("/respondent")
+    public ResponseEntity getRegisteruser(@RequestBody User user) {
+        UserDto object = authenticationService.registerUser(user);
+        return ResponseEntity.ok().body(object);
+    }
+
 
 
     // auth controller incomplete - register respondent user
-    @PostMapping("/respondent")
-    public ResponseEntity<Object> registerUser(@RequestBody User userDto) {
+    @PostMapping("/kjjkbkbh")
+    public ResponseEntity<UserDto> registerUser(@RequestBody User user) {
 
         // Must return userDto
         return null;
@@ -32,7 +41,7 @@ public class AuthenticationController {
 
     // auth controller incomplete - register coordinator user
     @PostMapping("/coordinator")
-    public ResponseEntity<Object> registerCoordinatorUser(@RequestBody Object userDto) {
+    public ResponseEntity<UserDto> registerCoordinatorUser(@RequestBody User user) {
 
         //Must return userDto with role of coordinator
         return null;
@@ -41,6 +50,7 @@ public class AuthenticationController {
     // auth controller incomplete login - login respondent user and admin
     // instead of Object user correct response entity i.e UserDto
     @PostMapping("/login")
+    public ResponseEntity<UserDto> login(@RequestBody LoginCredentials loginCredentials) {
     public String login(@RequestBody LoginCredentials loginCredentials) {
       var users = authenticationService.login(loginCredentials);
 

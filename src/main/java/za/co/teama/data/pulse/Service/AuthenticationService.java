@@ -1,9 +1,12 @@
 package za.co.teama.data.pulse.Service;
 
+import Dto.UserDto;
 import org.springframework.stereotype.Service;
 import za.co.teama.data.pulse.Models.LoginCredentials;
 import za.co.teama.data.pulse.Models.User;
 import za.co.teama.data.pulse.Repository.UserRepository;
+
+import java.util.UUID;
 
 @Service
 public class AuthenticationService {
@@ -16,17 +19,21 @@ public class AuthenticationService {
     }
 
     // incomplete - use userRepository to write to our db.
-    public Object registerUser(Object newUser) {
-        return null;
+    public UserDto registerUser(User newUser) {
+        newUser.setId(UUID.randomUUID());
+        User object = this.userRepository.save(newUser);
+        UserDto  dto = transformEntityToDto(object);
+        return dto;
     }
 
     // incomplete
-    public Object registerCoordinatorUser(Object newCoordinatorUser) {
+    public UserDto registerCoordinatorUser(User newCoordinatorUser) {
         return null;
     }
 
     // incomplete
     //
+    public UserDto login(LoginCredentials loginCredentials) {
     public User login(LoginCredentials loginCredentials) {
         // get user by email
       var user = userRepository.findByEmail(loginCredentials.getEmail());
@@ -41,8 +48,8 @@ public class AuthenticationService {
     }
 
     // adapt entity to userDto
-    public Object transformEntityToDto(User user) {
-        return null;
+    public UserDto transformEntityToDto(User user) {
+        return new UserDto(user.getId().toString(), user.getEmail(), user.getName(), user.getSurname(), String.valueOf(user.getRole()));
     }
 
     // check user exists by email
