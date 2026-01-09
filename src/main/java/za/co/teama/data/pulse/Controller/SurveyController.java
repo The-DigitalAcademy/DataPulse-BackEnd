@@ -1,15 +1,14 @@
 package za.co.teama.data.pulse.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import za.co.teama.data.pulse.Models.Survey;
 import za.co.teama.data.pulse.Service.SurveysService;
 
 
 //Gets all surveys
 @RestController
-@RequestMapping("/api/survey")
+@RequestMapping("/api/surveys")
 public class SurveyController {
 
     @Autowired
@@ -19,10 +18,20 @@ public class SurveyController {
         this.surveysService = surveyService;
     }
 
-    @GetMapping("/surveys")
-    private Object getAllSurveys() {
-       return surveysService.getSurveys();
+    @GetMapping
+    public Object getAllSurveys() { return surveysService.getSurveys(); }
+
+    @GetMapping("/{id}")
+    public Object getSurveyById(@PathVariable Long id) { return surveysService.getSurveyById(id); }
+
+    @PostMapping
+    public Object addSurvey(@RequestBody Survey survey) {
+        return surveysService.addSurvey(survey);
     }
+
+    @DeleteMapping("/{id}")
+    public Object deleteSurvey(@PathVariable Long id) { return surveysService.deleteSurvey(id); }
+
 }
 
 
