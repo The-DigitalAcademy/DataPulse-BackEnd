@@ -17,7 +17,8 @@ public class UserService {
         return null;
     }
 
-    public UserDto transformUserEntityToDo(User user) {
-        return new UserDto(user.getEmail(), user.getRole(), user.getId().toString(), user.getName(),user.getSurname());
+    public UserDto transformUserEntityToDto(User user) {
+        return new UserDto(user.getEmail(), String.valueOf(user.getRole()),
+                user.getId().toString(), user.getName(),user.getSurname());
     }
 }
