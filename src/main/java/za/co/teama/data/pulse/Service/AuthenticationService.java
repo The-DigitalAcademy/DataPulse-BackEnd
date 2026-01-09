@@ -27,7 +27,16 @@ public class AuthenticationService {
 
     // incomplete
     //
-    public Object login(LoginCredentials loginCredentials) {
+    public User login(LoginCredentials loginCredentials) {
+        // get user by email
+      var user = userRepository.findByEmail(loginCredentials.getEmail());
+      if(user == null) {
+        return null;
+      }
+      // check if the password matches
+      if(user.getPassword().equals(loginCredentials.getPassword())){
+        return user;
+      }
         return null;
     }
 
