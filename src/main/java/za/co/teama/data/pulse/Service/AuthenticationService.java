@@ -6,6 +6,8 @@ import za.co.teama.data.pulse.Models.LoginCredentials;
 import za.co.teama.data.pulse.Models.User;
 import za.co.teama.data.pulse.Repository.UserRepository;
 
+import java.util.UUID;
+
 @Service
 public class AuthenticationService {
 
@@ -17,8 +19,11 @@ public class AuthenticationService {
     }
 
     // incomplete - use userRepository to write to our db.
-    public UserDto registerUser(UserDto newUser) {
-        return null;
+    public UserDto registerUser(User newUser) {
+        newUser.setId(UUID.randomUUID());
+        User object = this.userRepository.save(newUser);
+        UserDto  dto = transformEntityToDto(object);
+        return dto;
     }
 
     // incomplete
@@ -34,7 +39,7 @@ public class AuthenticationService {
 
     // adapt entity to userDto
     public UserDto transformEntityToDto(User user) {
-        return null;
+        return new UserDto(user.getId().toString(), user.getEmail(), user.getName(), user.getSurname(), String.valueOf(user.getRole()));
     }
 
     // check user exists by email

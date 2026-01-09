@@ -1,6 +1,7 @@
 package za.co.teama.data.pulse.Controller;
 
 import Dto.UserDto;
+import org.aspectj.apache.bcel.Repository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,11 +21,18 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-// use authService, pass incoming data from request to appropriate service methods
+
+    // use authService, pass incoming data from request to appropriate service methods
+    @PostMapping("/respondent")
+    public ResponseEntity getRegisteruser(@RequestBody User user) {
+        UserDto object = authenticationService.registerUser(user);
+        return ResponseEntity.ok().body(object);
+    }
+
 
 
     // auth controller incomplete - register respondent user
-    @PostMapping("/respondent")
+    @PostMapping("/kjjkbkbh")
     public ResponseEntity<UserDto> registerUser(@RequestBody User user) {
 
         // Must return userDto
