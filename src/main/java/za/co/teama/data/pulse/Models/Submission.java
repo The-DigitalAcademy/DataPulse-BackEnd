@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity
 public class Submission {
     @Id
     private Integer id;
