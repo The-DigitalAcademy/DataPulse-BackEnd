@@ -1,5 +1,6 @@
 package za.co.teama.data.pulse.Service;
 
+import Dto.UserDto;
 import org.springframework.stereotype.Service;
 import za.co.teama.data.pulse.Models.LoginCredentials;
 import za.co.teama.data.pulse.Models.User;
@@ -16,23 +17,23 @@ public class AuthenticationService {
     }
 
     // incomplete - use userRepository to write to our db.
-    public Object registerUser(Object newUser) {
+    public UserDto registerUser(UserDto newUser) {
         return null;
     }
 
     // incomplete
-    public Object registerCoordinatorUser(Object newCoordinatorUser) {
+    public UserDto registerCoordinatorUser(User newCoordinatorUser) {
         return null;
     }
 
     // incomplete
     //
-    public Object login(LoginCredentials loginCredentials) {
+    public UserDto login(LoginCredentials loginCredentials) {
         return null;
     }
 
     // adapt entity to userDto
-    public Object transformEntityToDto(User user) {
+    public UserDto transformEntityToDto(User user) {
         return null;
     }
 
