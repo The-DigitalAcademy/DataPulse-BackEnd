@@ -1,22 +1,32 @@
 package za.co.teama.data.pulse.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
 @Data
-@Entity(name =" users")
+@Entity(name ="users")
 public class User {
     @Id
     private UUID id;
-    private String  Name;
+    private String name;
     private String surname;
-
     private String email;
     private String password;
-    private String role;
 
-    }
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    // Relationshhips with other entities
+
+    @OneToMany(mappedBy = "coordinator", cascade = CascadeType.ALL)
+    private List<Survey> createdSurveys = new ArrayList<>(); // only for coordinators
+
+    @OneToMany(mappedBy = "respondent", cascade = CascadeType.ALL)
+    private List<Response> surveyResponses = new ArrayList<>(); // only for respondents
+
+}
 
 
