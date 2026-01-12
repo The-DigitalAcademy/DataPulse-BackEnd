@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 import za.co.teama.data.pulse.Models.LoginCredentials;
 import za.co.teama.data.pulse.Models.User;
 import za.co.teama.data.pulse.Repository.UserRepository;
+import za.co.teama.data.pulse.Service.interfaces.UserServiceInterface;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface {
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {

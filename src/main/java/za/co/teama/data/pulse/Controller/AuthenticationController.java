@@ -24,41 +24,29 @@ public class AuthenticationController {
 
     // use authService, pass incoming data from request to appropriate service methods
     @PostMapping("/respondent")
-    public ResponseEntity getRegisteruser(@RequestBody User user) {
+    public ResponseEntity<UserDto>  getRegisteruser(@RequestBody User user) {
         UserDto object = authenticationService.registerUser(user);
         return ResponseEntity.ok().body(object);
-    }
-
-
-
-    // auth controller incomplete - register respondent user
-    @PostMapping("/kjjkbkbh")
-    public ResponseEntity<UserDto> registerUser(@RequestBody User user) {
-
-        // Must return userDto
-        return null;
     }
 
     // auth controller incomplete - register coordinator user
     @PostMapping("/coordinator")
     public ResponseEntity<UserDto> registerCoordinatorUser(@RequestBody User user) {
-
         //Must return userDto with role of coordinator
-        return null;
+        var createdCoordinatorUser = this.authenticationService.registerCoordinatorUser(user);
+        return ResponseEntity.ok().body(createdCoordinatorUser);
     }
 
     // auth controller incomplete login - login respondent user and admin
     // instead of Object user correct response entity i.e UserDto
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody LoginCredentials loginCredentials) {
-    public String login(@RequestBody LoginCredentials loginCredentials) {
       var users = authenticationService.login(loginCredentials);
-
       if(users == null) {
-        return "User not recognized";
+          // throw usernot found error
+        return null;
       }
-
-      return "Logged in successfully";
+      return ResponseEntity.ok().body(users);
     }
 
 }
