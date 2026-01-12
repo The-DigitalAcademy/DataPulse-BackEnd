@@ -1,12 +1,8 @@
 package za.co.teama.data.pulse.Controller;
 
 import Dto.UserDto;
-import org.aspectj.apache.bcel.Repository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import za.co.teama.data.pulse.Models.LoginCredentials;
 import za.co.teama.data.pulse.Models.User;
 import za.co.teama.data.pulse.Service.AuthenticationService;
@@ -24,7 +20,7 @@ public class AuthenticationController {
 
     // use authService, pass incoming data from request to appropriate service methods
     @PostMapping("/respondent")
-    public ResponseEntity<UserDto>  getRegisteruser(@RequestBody User user) {
+    public ResponseEntity<UserDto> getRegisteruser(@RequestBody User user) {
         UserDto object = authenticationService.registerUser(user);
         return ResponseEntity.ok().body(object);
     }
