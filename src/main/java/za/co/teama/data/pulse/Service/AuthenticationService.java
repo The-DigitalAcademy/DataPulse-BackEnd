@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import za.co.teama.data.pulse.Models.LoginCredentials;
 import za.co.teama.data.pulse.Models.User;
 import za.co.teama.data.pulse.Repository.UserRepository;
-
+import za.co.teama.data.pulse.Service.interfaces.AuthenticationServiceInterface;
 import java.util.UUID;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationService implements AuthenticationServiceInterface {
 
     private final UserRepository userRepository;
 
@@ -34,7 +34,6 @@ public class AuthenticationService {
     // incomplete
     //
     public UserDto login(LoginCredentials loginCredentials) {
-    public User login(LoginCredentials loginCredentials) {
         // get user by email
       var user = userRepository.findByEmail(loginCredentials.getEmail());
       if(user == null) {
@@ -42,7 +41,8 @@ public class AuthenticationService {
       }
       // check if the password matches
       if(user.getPassword().equals(loginCredentials.getPassword())){
-        return user;
+          var userDto = transformEntityToDto(user);
+        return userDto;
       }
         return null;
     }
