@@ -26,6 +26,7 @@ public class SurveyController {
 
     @PostMapping
     public Object addSurvey(@RequestBody Survey survey) {
+        System.out.println(survey);
         return surveysService.addSurvey(survey);
     }
 
