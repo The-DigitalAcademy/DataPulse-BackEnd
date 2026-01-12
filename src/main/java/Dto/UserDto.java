@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class UserDto {
     private String id;
     private String name;
-    private String password;
+    private String email;
     private String role;
     private String surname;
 }
