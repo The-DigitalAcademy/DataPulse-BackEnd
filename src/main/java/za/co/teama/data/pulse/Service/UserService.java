@@ -36,7 +36,6 @@ public class UserService implements UserServiceInterface {
     }
 
     public UserDto transformUserEntityToDto(User user) {
-        return new UserDto(user.getEmail(), String.valueOf(user.getRole()),
-                user.getId().toString(), user.getName(),user.getSurname());
+        return new UserDto(user.getId().toString(), user.getName() +" "+ user.getSurname(), user.getEmail(), String.valueOf(user.getRole()));
     }
 }

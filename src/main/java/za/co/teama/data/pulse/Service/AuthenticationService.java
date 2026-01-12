@@ -66,7 +66,7 @@ public class AuthenticationService implements AuthenticationServiceInterface {
 
     // adapt entity to userDto
     public UserDto transformEntityToDto(User user) {
-        return new UserDto(user.getId().toString(), user.getEmail(), user.getName(), user.getSurname(), String.valueOf(user.getRole()));
+        return new UserDto(user.getId().toString(), user.getName() +" "+ user.getSurname(), user.getEmail(), String.valueOf(user.getRole()));
     }
 
     /**
