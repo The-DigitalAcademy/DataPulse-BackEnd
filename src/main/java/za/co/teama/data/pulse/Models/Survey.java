@@ -1,12 +1,15 @@
 package za.co.teama.data.pulse.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "surveys")
 public class Survey {
@@ -26,6 +29,7 @@ public class Survey {
     // Questions of this Survey
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;
