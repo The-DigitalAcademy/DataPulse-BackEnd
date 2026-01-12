@@ -16,22 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
-    public String register(@RequestBody User user) {
-        userService.createUser(user);
-        return "Registered successfully";
-    }
 
-    @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        var users = userService.getUserByEmail(user);
-
-        if (users == null){
-          return "Invalid credentials";
-        }
-
-        return "Logged in successfully";
-    }
 }
 
 
