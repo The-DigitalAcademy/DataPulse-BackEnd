@@ -1,9 +1,13 @@
 package za.co.teama.data.pulse.Controller;
 
+import Dto.SurveyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.co.teama.data.pulse.Models.Survey;
 import za.co.teama.data.pulse.Service.SurveysService;
+
+import java.util.List;
+import java.util.Optional;
 
 
 //Gets all surveys
@@ -19,19 +23,20 @@ public class SurveyController {
     }
 
     @GetMapping
-    public Object getAllSurveys() { return surveysService.getSurveys(); }
+    public List<SurveyDto> getAllSurveys() { return surveysService.getSurveys(); }
 
     @GetMapping("/{id}")
-    public Object getSurveyById(@PathVariable Long id) { return surveysService.getSurveyById(id); }
+    public Optional<SurveyDto> getSurveyById(@PathVariable Long id) {
+        return surveysService.getSurveyById(id); }
 
     @PostMapping
-    public Object addSurvey(@RequestBody Survey survey) {
+    public SurveyDto addSurvey(@RequestBody Survey survey) {
         System.out.println(survey);
         return surveysService.addSurvey(survey);
     }
 
     @DeleteMapping("/{id}")
-    public Object deleteSurvey(@PathVariable Long id) { return surveysService.deleteSurvey(id); }
+    public Optional<SurveyDto> deleteSurvey(@PathVariable Long id) { return surveysService.deleteSurvey(id); }
 
 }
 

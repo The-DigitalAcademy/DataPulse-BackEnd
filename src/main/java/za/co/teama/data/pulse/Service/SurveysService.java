@@ -1,12 +1,16 @@
 package za.co.teama.data.pulse.Service;
 
+import Dto.CreatorDto;
+import Dto.SurveyDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import za.co.teama.data.pulse.Models.Response;
 import za.co.teama.data.pulse.Models.Survey;
 import za.co.teama.data.pulse.Repository.SurveyRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SurveysService {
@@ -16,27 +20,48 @@ public class SurveysService {
         public SurveysService(SurveyRepository surveyRepo){ this.surveyRepo = surveyRepo; }
 
         // Get Service
-        public List<Survey> getSurveys() {
-            return surveyRepo.findAll();
+        public List<SurveyDto> getSurveys() {
+            return surveyRepo.findAll()
+                    .stream()
+                    .map(this::convertToDto)  // convert each Survey to SurveyDto
+                    .toList();
         }
 
        // Get by ID
-        public Optional<Survey> getSurveyById(Long id) {
-            return surveyRepo.findById(id);
+        public Optional<SurveyDto> getSurveyById(Long id) {
+            return surveyRepo.findById(id)
+                  .map(this::convertToDto);
         }
 
        // Save survey
-        public Survey addSurvey(Survey survey) {
-            return surveyRepo.save(survey);
+        public SurveyDto addSurvey(Survey survey) {
+            Survey saved = surveyRepo.save(survey);
+            return convertToDto(saved);
 
         }
 
       // Delete Survey
-        public Survey deleteSurvey(Long id) {
-            var survey = surveyRepo.findById(id);
-            surveyRepo.deleteById(id);
-            return null;
+        public Optional<SurveyDto> deleteSurvey(Long id) {
+            return surveyRepo.findById(id)
+                    .map(survey -> {
+                        surveyRepo.deleteById(id);
+                        return convertToDto(survey);
+                    });
         }
 
 
+    private SurveyDto convertToDto(Survey survey) {
+        return new SurveyDto(
+                survey.getId(),
+                survey.getTitle(),
+                survey.getDescription(),
+                survey.isOpen(),
+                new CreatorDto(survey.getCoordinator()),
+                survey.getCreatedAt(),
+                survey.getResponses()
+                        .stream()
+                        .map(response -> response.getId().longValue())
+                        .collect(Collectors.toList())
+        );
+    }
 }
