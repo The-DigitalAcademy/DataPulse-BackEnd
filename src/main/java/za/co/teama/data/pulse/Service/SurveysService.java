@@ -57,6 +57,7 @@ public class SurveysService {
                 survey.getDescription(),
                 survey.isOpen(),
                 new CreatorDto(survey.getCoordinator()),
+                survey.getQuestions(),
                 survey.getCreatedAt(),
                 survey.getResponses()
                         .stream()
