@@ -58,13 +58,13 @@ public class Survey {
     }
 
     // custom toSrting method
-    @Override
-    public String toString() {
-        return "Survey{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", isOpen=" + isOpen +
-                ", numOfQuestions=" + (questions != null ? questions.size() : 0) +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Survey{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", isOpen=" + isOpen +
+//                ", numOfQuestions=" + (questions != null ? questions.size() : 0) +
+//                '}';
+//    }
 }

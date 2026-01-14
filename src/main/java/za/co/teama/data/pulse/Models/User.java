@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Data
 @Entity(name ="users")
-@ToString(exclude = {"surveys", "responses"}) // exclude these from lombok, they may cause infinite loops
+//@ToString(exclude = {"surveys", "responses"}) // exclude these from lombok, they may cause infinite loops
 public class User {
     @Id
     private UUID id;

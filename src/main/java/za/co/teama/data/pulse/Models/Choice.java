@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Data
 @Entity
-@ToString(exclude = "question")
+//@ToString(exclude = "question")
 public class Choice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

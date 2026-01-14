@@ -2,9 +2,12 @@ package za.co.teama.data.pulse.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity(name = "answer")
+@ToString(exclude = {"question", "response"}) // exclude these from lombok, they may cause infinite loops
+
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

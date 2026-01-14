@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@ToString(exclude = {"survey", "choices"}) // exclude these from lombok, they may cause infinite loops
+//@ToString(exclude = {"survey", "choices"}) // exclude these from lombok, they may cause infinite loops
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,6 +2,7 @@ package za.co.teama.data.pulse.Service;
 
 import Dto.AnswerDto;
 import Dto.ResponseDto;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import za.co.teama.data.pulse.Models.Answer;
 import za.co.teama.data.pulse.Models.Response;
@@ -23,19 +24,29 @@ public class ResponseService {
     }
 
     //Create Responses
+    @Transactional
     public ResponseDto addResponse(Response response) {
         // Set bidirectional relationships for answers
         if (response.getAnswers() != null) {
             for (Answer answer : response.getAnswers()) {
-                answer.setResponse(response); // link answer back to this response
+                try {
+                    answer.setResponse(response); // link answer back to this response
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 
         // Save the response entity
-        Response saved = responseRepo.save(response);
+        try {
+            Response saved = responseRepo.save(response);
+            return convertToDto(saved);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         // Convert the saved entity to DTO
-        return convertToDto(saved);
+
     }
 
     private ResponseDto convertToDto(Response response) {
