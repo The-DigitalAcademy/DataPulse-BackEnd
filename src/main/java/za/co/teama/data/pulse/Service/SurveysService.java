@@ -1,6 +1,8 @@
 package za.co.teama.data.pulse.Service;
 
+import Dto.ChoiceDto;
 import Dto.CreatorDto;
+import Dto.QuestionDto;
 import Dto.SurveyDto;
 import org.springframework.stereotype.Service;
 import za.co.teama.data.pulse.Models.Choice;
@@ -78,6 +80,17 @@ public class SurveysService {
                 survey.getDescription(),
                 survey.isOpen(),
                 new CreatorDto(survey.getCoordinator()),
+                survey.getQuestions()
+                        .stream()
+                        .map(question -> new QuestionDto(
+                                question.getId(),
+                                question.getText(),
+                                question.getChoiceOptions()
+                                        .stream()
+                                        .map(ChoiceDto::new)
+                                        .toList()
+                        ))
+                        .toList(),
                 survey.getCreatedAt(),
                 survey.getResponses()
                         .stream()
