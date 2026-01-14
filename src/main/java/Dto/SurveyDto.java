@@ -17,7 +17,7 @@ public class SurveyDto {
     private String description;
     private boolean isOpen;
     private CreatorDto coordinator;
-    private List<Question> questions;
+    private List<QuestionDto> questions;
     private LocalDateTime createdAt;
     private List<Long> responseIds;
 
