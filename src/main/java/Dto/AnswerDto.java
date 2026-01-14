@@ -8,4 +8,7 @@ public class AnswerDto {
     private Integer questionId;
     private Integer choiceId;
     private String textAnswer;
+
+    public AnswerDto(Integer id, Integer integer, Integer integer1, String textAnswer) {
+    }
 }

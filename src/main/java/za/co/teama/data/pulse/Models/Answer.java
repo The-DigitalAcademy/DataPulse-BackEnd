@@ -27,4 +27,5 @@ public class Answer {
 
     @Column(columnDefinition = "TEXT")
     private String textAnswer;
+
 }
