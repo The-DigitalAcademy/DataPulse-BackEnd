@@ -31,7 +31,6 @@ public class SurveyController {
 
     @PostMapping
     public SurveyDto addSurvey(@RequestBody Survey survey) {
-        System.out.println(survey);
         return surveysService.addSurvey(survey);
     }
 

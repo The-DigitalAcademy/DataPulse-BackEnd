@@ -2,12 +2,15 @@ package za.co.teama.data.pulse.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity(name ="users")
+@ToString(exclude = {"surveys", "responses"}) // exclude these from lombok, they may cause infinite loops
 public class User {
     @Id
     private UUID id;

@@ -27,9 +27,9 @@ public class UserService implements UserServiceInterface {
     }
 
     public UserDto signupUser (User user) {
-
         return null;
     }
+
     public User getUserByEmail (User user){
 //      userRepository.
       return user;

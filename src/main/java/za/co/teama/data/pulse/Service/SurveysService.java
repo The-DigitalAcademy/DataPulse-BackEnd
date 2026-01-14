@@ -1,13 +1,14 @@
 package za.co.teama.data.pulse.Service;
 
+import Dto.ChoiceDto;
 import Dto.CreatorDto;
+import Dto.QuestionDto;
 import Dto.SurveyDto;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import za.co.teama.data.pulse.Models.Response;
+import za.co.teama.data.pulse.Models.Choice;
+import za.co.teama.data.pulse.Models.Question;
 import za.co.teama.data.pulse.Models.Survey;
 import za.co.teama.data.pulse.Repository.SurveyRepository;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,11 +35,33 @@ public class SurveysService {
         }
 
        // Save survey
-        public SurveyDto addSurvey(Survey survey) {
-            Survey saved = surveyRepo.save(survey);
-            return convertToDto(saved);
+//        public SurveyDto addSurvey(Survey survey) {
+//            Survey saved = surveyRepo.save(survey);
+//            return convertToDto(saved);
+//
+//        }
 
-        }
+    /**
+     * Front end post survey with question dto filled, update method to also write Questions and Choice [relationships]
+     * @param survey - posted with questions list filled.
+     * @return created Survey
+     */
+           public SurveyDto addSurvey(Survey survey) {
+               // bidirectional relationships before saving
+               if (survey.getQuestions() != null) {
+                   for (Question question : survey.getQuestions()) {
+                       question.setSurvey(survey);
+                       // set bidirectional relationship for choices
+                       if (question.getChoiceOptions() != null) {
+                           for (Choice choice : question.getChoiceOptions()) {
+                               choice.setQuestion(question);
+                           }
+                       }
+                   }
+               }
+           Survey saved = surveyRepo.save(survey);
+           return convertToDto(saved);
+       }
 
       // Delete Survey
         public Optional<SurveyDto> deleteSurvey(Long id) {
@@ -57,6 +80,17 @@ public class SurveysService {
                 survey.getDescription(),
                 survey.isOpen(),
                 new CreatorDto(survey.getCoordinator()),
+                survey.getQuestions()
+                        .stream()
+                        .map(question -> new QuestionDto(
+                                question.getId(),
+                                question.getText(),
+                                question.getChoiceOptions()
+                                        .stream()
+                                        .map(ChoiceDto::new)
+                                        .toList()
+                        ))
+                        .toList(),
                 survey.getCreatedAt(),
                 survey.getResponses()
                         .stream()
