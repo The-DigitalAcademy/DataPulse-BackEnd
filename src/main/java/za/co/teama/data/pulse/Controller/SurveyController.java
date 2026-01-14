@@ -26,7 +26,7 @@ public class SurveyController {
     public List<SurveyDto> getAllSurveys() { return surveysService.getSurveys(); }
 
     @GetMapping("/{id}")
-    public Optional<SurveyDto> getSurveyById(@PathVariable Long id) {
+    public Optional<SurveyDto> getSurveyById(@PathVariable Integer id) {
         return surveysService.getSurveyById(id); }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class SurveyController {
     }
 
     @DeleteMapping("/{id}")
-    public Optional<SurveyDto> deleteSurvey(@PathVariable Long id) { return surveysService.deleteSurvey(id); }
+    public Optional<SurveyDto> deleteSurvey(@PathVariable Integer id) { return surveysService.deleteSurvey(id); }
 
 }
 

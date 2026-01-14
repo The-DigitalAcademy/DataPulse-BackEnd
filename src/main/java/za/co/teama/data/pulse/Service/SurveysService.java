@@ -29,7 +29,7 @@ public class SurveysService {
         }
 
        // Get by ID
-        public Optional<SurveyDto> getSurveyById(Long id) {
+        public Optional<SurveyDto> getSurveyById(Integer id) {
             return surveyRepo.findById(id)
                   .map(this::convertToDto);
         }
@@ -64,7 +64,7 @@ public class SurveysService {
        }
 
       // Delete Survey
-        public Optional<SurveyDto> deleteSurvey(Long id) {
+        public Optional<SurveyDto> deleteSurvey(Integer id) {
             return surveyRepo.findById(id)
                     .map(survey -> {
                         surveyRepo.deleteById(id);
